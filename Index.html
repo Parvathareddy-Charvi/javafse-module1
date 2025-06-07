@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Local Community Event Portal</title>
+    <!-- Internal CSS for quick demo (body bg) -->
+    <style>
+        body {
+            background: #f7faff;
+        }
+        /* Inline style example for red heading is below */
+        /* Remove default margin/padding for all elements */
+        * { margin: 0; padding: 0; }
+    </style>
+    <!-- External stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <!-- ================= Navigation ================ -->
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="#home" class="nav-link">Home</a></li>
+            <li><a href="#events" class="nav-link">Events</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+            <li><a href="help.html" class="nav-link" target="_blank">Help</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main -->
+    <!-- ================ Main Content ================ -->
+    <main>
+        <!-- Welcome Banner -->
+        <header id="mainHeader">
+            <div id="welcomeBanner">
+                Welcome, <span class="highlight">Resident!</span>
+                <span style="color: red; font-weight: bold;">Special Offer: 10% off on first event!</span>
+            </div>
+        </header>
+
+        <!-- Home Section -->
+        <section id="home">
+            <h2 style="color: #e53935;">Discover Community Events Near You</h2> <!-- inline style: red -->
+            <p class="desc">
+                Connect, participate, and enjoy what our community has to offer!
+            </p>
+        </section>
+
+        <!-- Events Section -->
+        <section id="events">
+            <h2 class="section-title">Upcoming & Past Events Gallery</h2>
+            <!-- Table Gallery -->
+            <table class="galleryTable">
+                <caption>Snapshots from Previous Community Events</caption>
+                <tr>
+                    <td>
+                        <img src="event1.jpg" alt="Music Night" title="Music Night"
+                             class="gallery-img event-img"
+                             ondblclick="enlargeImg(this)">
+                        <br>Music Night
+                    </td>
+                    <td>
+                        <img src="event2.jpg" alt="Sports Day" title="Sports Day"
+                             class="gallery-img"
+                             ondblclick="enlargeImg(this)">
+                        <br>Sports Day
+                    </td>
+                    <td>
+                        <img src="event3.jpg" alt="Art Workshop" title="Art Workshop"
+                             class="gallery-img event-img"
+                             ondblclick="enlargeImg(this)">
+                        <br>Art Workshop
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="event4.jpg" alt="Food Fest" title="Food Fest"
+                             class="gallery-img"
+                             ondblclick="enlargeImg(this)">
+                        <br>Food Fest
+                    </td>
+                    <td>
+                        <img src="event5.jpg" alt="Tech Meetup" title="Tech Meetup"
+                             class="gallery-img"
+                             ondblclick="enlargeImg(this)">
+                        <br>Tech Meetup
+                    </td>
+                    <td>
+                        <img src="event6.jpg" alt="Cleanup Drive" title="Cleanup Drive"
+                             class="gallery-img"
+                             ondblclick="enlargeImg(this)">
+                        <br>Cleanup Drive
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Registration Form -->
+        <section id="register">
+            <h2 class="section-title">Register for an Event</h2>
+            <form id="registrationForm">
+                <label for="regName">Name:</label>
+                <input type="text" id="regName" name="name" placeholder="Your Name" required autofocus>
+                <label for="regEmail">Email:</label>
+                <input type="email" id="regEmail" name="email" placeholder="your@email.com" required>
+                <label for="regDate">Event Date:</label>
+                <input type="date" id="regDate" name="date" required>
+                <label for="regType">Event Type:</label>
+                <select id="regType" name="eventType" required>
+                    <option value="">Select Event</option>
+                    <option value="music">Music</option>
+                    <option value="sports">Sports</option>
+                    <option value="workshop">Workshop</option>
+                </select>
+                <span id="regFee"></span>
+                <label for="regMsg">Message:</label>
+                <textarea id="regMsg" name="message" rows="2" placeholder="Any notes..."></textarea>
+                <button type="submit" id="registerBtn">Submit Registration</button>
+                <output id="regOutput"></output>
+            </form>
+        </section>
+
+        <!-- Feedback Section -->
+        <section id="feedbackSection">
+            <h2 class="section-title">Event Feedback</h2>
+            <form id="feedbackForm">
+                <label for="feedbackPhone">Phone:</label>
+                <input type="text" id="feedbackPhone" name="phone" placeholder="10-digit phone">
+                <span id="phoneError" class="error"></span>
+                <label for="feedbackDropdown">Which event did you attend?</label>
+                <select id="feedbackDropdown">
+                    <option value="">Select</option>
+                    <option value="music">Music</option>
+                    <option value="sports">Sports</option>
+                    <option value="workshop">Workshop</option>
+                </select>
+                <span id="feeFeedback"></span>
+                <label for="feedbackText">Your Feedback:</label>
+                <textarea id="feedbackText" rows="3"></textarea>
+                <div id="charCount">0 characters</div>
+                <button type="button" id="feedbackBtn">Submit Feedback</button>
+            </form>
+        </section>
+
+        <!-- Geolocation Section -->
+        <section id="geoSection">
+            <h2 class="section-title">Find Nearby Events</h2>
+            <button class="btn" id="geoBtn">Find Nearby Events</button>
+            <div id="geoOutput"></div>
+        </section>
+
+        <!-- Video Section -->
+        <section id="videoSection">
+            <h2 class="section-title">Event Promo Video</h2>
+            <video id="promoVideo" width="400" controls>
+                <source src="promo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div id="videoReadyMsg"></div>
+        </section>
+
+        <!-- Preferences Section -->
+        <section id="preferencesSection">
+            <h2 class="section-title">Preferences</h2>
+            <button class="btn clear" id="clearPrefsBtn">Clear Preferences</button>
+        </section>
+
+        <!-- Dynamic Events List (JS) -->
+        <section id="dynamicEvents">
+            <h2 class="section-title">Dynamic Events List</h2>
+            <div id="eventsFilterArea">
+                <label for="categoryFilter">Filter by Category:</label>
+                <select id="categoryFilter">
+                    <option value="">All</option>
+                    <option value="music">Music</option>
+                    <option value="sports">Sports</option>
+                    <option value="workshop">Workshop</option>
+                </select>
+                <input type="text" id="searchEvent" placeholder="Search by name...">
+            </div>
+            <div id="eventCards" class="card-list"></div>
+        </section>
+
+        <!-- News Section for columns -->
+        <section id="newsSection">
+            <h2 class="section-title">Community Bulletin</h2>
+            <div class="news-article">
+                <p>
+                    The annual Spring Festival is back with food stalls, live bands, and local crafts. Volunteers are welcome!
+                    <br><br>
+                    Cleanup drives scheduled for next weekend—bring your friends and family!
+                    <br><br>
+                    New workshops on painting, pottery, and digital skills—register now!
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2 class="section-title">Contact Us</h2>
+            <p>Email: <a href="mailto:community@city.org">community@city.org</a></p>
+            <p>Phone: (123) 456-7890</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <!-- ================ Footer ================ -->
+    <footer>
+        &copy; 2025 Local City Council. Portal by Community Web Team.
+    </footer>
+
+    <!-- JQuery for exercise 14 -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- Main JS -->
+    <script src="main.js"></script>
+</body>
+</html>
