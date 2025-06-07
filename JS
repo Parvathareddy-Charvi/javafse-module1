@@ -1,0 +1,233 @@
+// 1. JS Setup
+console.log("Welcome to the Community Portal");
+
+window.onload = function () {
+    alert("Welcome! The page is fully loaded.");
+};
+
+// 2. Data Types, Operators
+const eventName = "Music Night";
+const eventDate = "2025-07-20";
+let seats = 30;
+let info = `Event: ${eventName}, Date: ${eventDate}, Seats: ${seats}`;
+console.log(info);
+
+function decrementSeats() { seats--; }
+function incrementSeats() { seats++; }
+
+// 3. Conditionals, Loops, Error Handling
+let events = [
+    {id: 1, name: "Music Night", date: "2025-07-20", category: "music", seats: 5, location: "Park"},
+    {id: 2, name: "Sports Day", date: "2025-08-02", category: "sports", seats: 0, location: "Stadium"},
+    {id: 3, name: "Art Workshop", date: "2025-09-10", category: "workshop", seats: 8, location: "Library"},
+    {id: 4, name: "Food Fest", date: "2025-05-02", category: "food", seats: 10, location: "Main Square"}
+];
+
+function isUpcoming(event) {
+    const now = new Date();
+    return new Date(event.date) > now && event.seats > 0;
+}
+function displayValidEvents() {
+    const container = document.getElementById("eventCards");
+    container.innerHTML = "";
+    let validEvents = events.filter(isUpcoming);
+    validEvents.forEach(ev => {
+        const card = createEventCard(ev);
+        container.appendChild(card);
+    });
+}
+function createEventCard(ev) {
+    const div = document.createElement("div");
+    div.className = "eventCard";
+    div.innerHTML = `
+        <h3>${ev.name}</h3>
+        <p><b>Date:</b> ${ev.date}</p>
+        <p><b>Category:</b> ${ev.category}</p>
+        <p><b>Seats Left:</b> <span id="seats-${ev.id}">${ev.seats}</span></p>
+        <button class="cta-button" id="regbtn-${ev.id}" ${ev.seats<=0?'disabled':''}>Register</button>
+    `;
+    // JS event handling
+    div.querySelector(".cta-button").onclick = () => {
+        try {
+            if (ev.seats > 0) {
+                ev.seats--;
+                document.getElementById(`seats-${ev.id}`).textContent = ev.seats;
+                if (ev.seats === 0) div.querySelector(".cta-button").disabled = true;
+                alert(`Registered for ${ev.name}!`);
+            }
+        } catch (err) { alert("Registration failed: " + err.message); }
+    };
+    return div;
+}
+// 4. Functions, Scope, Closures
+function addEvent(event) { events.push(event); }
+function filterEventsByCategory(cat) {
+    return events.filter(ev => ev.category === cat);
+}
+function countRegistrationsForCategory(category) {
+    let count = 0;
+    return function () {
+        count++;
+        return `${count} registrations for ${category}`;
+    }
+}
+const musicRegistrations = countRegistrationsForCategory("music");
+
+// 5. Objects & Prototypes
+function Event(name, date, category, seats) {
+    this.name = name;
+    this.date = date;
+    this.category = category;
+    this.seats = seats;
+}
+Event.prototype.checkAvailability = function() { return this.seats > 0; };
+const e = new Event("Tech Meetup", "2025-10-01", "workshop", 8);
+console.log(Object.entries(e));
+
+// 6. Arrays & Methods
+let eventArr = [
+    { name: "Workshop on Baking", type: "workshop" },
+    { name: "Community Yoga", type: "sports" },
+    { name: "Rock Concert", type: "music" }
+];
+eventArr.push({ name: "Photography Basics", type: "workshop" });
+const musicEvents = eventArr.filter(ev => ev.type === "music");
+const eventTitles = eventArr.map(ev => ev.name + " [" + ev.type + "]");
+
+// 7. DOM Manipulation
+document.addEventListener("DOMContentLoaded", () => {
+    displayValidEvents();
+    // Filter events by category
+    document.getElementById("categoryFilter").onchange = function () {
+        const cat = this.value;
+        const container = document.getElementById("eventCards");
+        container.innerHTML = "";
+        let filtered = cat ? events.filter(ev => ev.category === cat && isUpcoming(ev)) : events.filter(isUpcoming);
+        filtered.forEach(ev => container.appendChild(createEventCard(ev)));
+    };
+    // Quick search
+    document.getElementById("searchEvent").addEventListener("keydown", function (e) {
+        let q = this.value.toLowerCase();
+        const container = document.getElementById("eventCards");
+        container.innerHTML = "";
+        let filtered = events.filter(ev => ev.name.toLowerCase().includes(q) && isUpcoming(ev));
+        filtered.forEach(ev => container.appendChild(createEventCard(ev)));
+    });
+});
+
+// 8. Event Handling for feedback form
+document.getElementById("feedbackPhone").onblur = function () {
+    const phone = this.value;
+    const error = document.getElementById("phoneError");
+    if (phone && !/^\d{10}$/.test(phone)) {
+        error.textContent = "Enter a valid 10-digit phone number.";
+    } else {
+        error.textContent = "";
+    }
+};
+document.getElementById("feedbackDropdown").onchange = function () {
+    const fees = { music: "$10", sports: "$5", workshop: "$15" };
+    document.getElementById("feeFeedback").textContent = this.value ? fees[this.value] : "";
+};
+document.getElementById("feedbackBtn").onclick = function () {
+    alert("Thank you for your feedback!");
+};
+document.getElementById("feedbackText").onkeyup = function () {
+    document.getElementById("charCount").textContent = this.value.length + " characters";
+};
+
+// 9. Registration form events
+document.getElementById("regType").onchange = function () {
+    const fees = { music: "$10", sports: "$5", workshop: "$15" };
+    document.getElementById("regFee").textContent = this.value ? fees[this.value] : "";
+    // Save preferences
+    localStorage.setItem("preferredEventType", this.value);
+};
+// Prefill event type from localStorage
+document.addEventListener("DOMContentLoaded", function () {
+    let pref = localStorage.getItem("preferredEventType");
+    if (pref) {
+        document.getElementById("regType").value = pref;
+        document.getElementById("regFee").textContent = { music: "$10", sports: "$5", workshop: "$15" }[pref];
+    }
+});
+// Clear preferences
+document.getElementById("clearPrefsBtn").onclick = function () {
+    localStorage.clear();
+    sessionStorage.clear();
+    alert("Preferences cleared!");
+};
+// Form submit
+document.getElementById("registrationForm").onsubmit = function (e) {
+    e.preventDefault();
+    document.getElementById("regOutput").value = "Registration submitted! Thank you.";
+};
+
+// 10. Double-click to enlarge image
+window.enlargeImg = function (img) {
+    img.classList.toggle("enlarged");
+};
+
+// 11. Video events and onbeforeunload
+document.getElementById("promoVideo").oncanplay = function () {
+    document.getElementById("videoReadyMsg").textContent = "Video ready to play";
+};
+let formDirty = false;
+document.getElementById("registrationForm").addEventListener("input", () => formDirty = true);
+document.getElementById("registrationForm").addEventListener("submit", () => formDirty = false);
+window.onbeforeunload = function (e) {
+    if (formDirty) return "You have unsaved changes. Are you sure you want to leave?";
+};
+
+// 12. Geolocation
+document.getElementById("geoBtn").onclick = function () {
+    const output = document.getElementById("geoOutput");
+    if (!navigator.geolocation) {
+        output.textContent = "Geolocation is not supported by your browser.";
+        return;
+    }
+    output.textContent = "Locating...";
+    navigator.geolocation.getCurrentPosition(
+        (pos) => {
+            output.textContent = `Your coordinates: Latitude ${pos.coords.latitude.toFixed(4)}, Longitude ${pos.coords.longitude.toFixed(4)}`;
+        },
+        (err) => {
+            if (err.code === 1) output.textContent = "Permission denied.";
+            else if (err.code === 2) output.textContent = "Position unavailable.";
+            else if (err.code === 3) output.textContent = "Timeout while locating.";
+            else output.textContent = "Unknown error.";
+        },
+        { enableHighAccuracy: true, timeout: 7000, maximumAge: 0 }
+    );
+};
+
+// 13. Async JS, Promises, Fetch API (simulate)
+function fetchEvents() {
+    document.getElementById("eventCards").innerHTML = "<div>Loading events...</div>";
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve([
+                {id: 5, name: "Cleanup Drive", date: "2025-09-20", category: "workshop", seats: 12, location: "Beach"},
+                {id: 6, name: "Book Club", date: "2025-08-10", category: "workshop", seats: 20, location: "Library"}
+            ]);
+        }, 1000);
+    });
+}
+fetchEvents().then(newEvents => {
+    newEvents.forEach(e => addEvent(e));
+    displayValidEvents();
+}).catch(() => {
+    document.getElementById("eventCards").innerHTML = "<div>Failed to load events.</div>";
+});
+
+// 14. jQuery DOM manipulation and fade
+$(function () {
+    $("#registerBtn").click(function () {
+        $("#regOutput").fadeIn().delay(1000).fadeOut();
+    });
+    // Fade in event cards
+    $(".eventCard").hide().fadeIn(1000);
+    // Example: benefit of React/Vue (not in code)
+    // // Benefit: React/Vue provide efficient component-based UI updates and state management.
+});
+// (end)
