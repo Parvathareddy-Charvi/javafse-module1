@@ -1,0 +1,533 @@
+
+## 1. Setting Up Bootstrap 5
+
+### 1.1: Basic HTML Page with Bootstrap 5 via CDN
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bootstrap 5 CDN Example</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <h1 class="text-primary">Hello Bootstrap 5!</h1>
+</body>
+</html>
+```
+
+---
+
+### 1.2: Using Downloaded Bootstrap Files
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bootstrap Local Example</title>
+  <link rel="stylesheet" href="bootstrap-5.3.2-dist/css/bootstrap.min.css">
+</head>
+<body>
+  <h1 class="text-success">This uses local Bootstrap files</h1>
+  <script src="bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+```
+
+---
+
+## 2. Bootstrap Structure and Files
+
+### 2.1: Directory Structure
+
+- **css/**: Contains Bootstrap CSS files for styles, grid, and components.
+- **js/**: Contains JS files for interactive plugins like modals, dropdowns, accordions.
+- **icons/**: Contains SVG/font files for Bootstrap Icons.
+
+---
+
+### 2.2: Include Bootstrap JS Plugins
+
+```html
+<script src="bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
+<!-- Or via CDN: -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+```
+
+---
+
+## 3. Responsive Grid Layout
+
+### 3.1 & 3.2: Three Responsive Columns
+
+```html
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-6 col-lg-4 bg-primary text-white p-3">Col 1</div>
+    <div class="col-12 col-md-6 col-lg-4 bg-secondary text-white p-3">Col 2</div>
+    <div class="col-12 col-md-12 col-lg-4 bg-success text-white p-3">Col 3</div>
+  </div>
+</div>
+```
+
+---
+
+## 4. Column Layouts and Grid Classes
+
+### 4.1: Two-column Layout
+
+```html
+<div class="row">
+  <div class="col-md-3 bg-light p-3">Sidebar</div>
+  <div class="col-md-9 bg-white p-3">Main Content</div>
+</div>
+```
+
+### 4.2: Four Equal Columns
+
+```html
+<div class="row">
+  <div class="col-sm-3 bg-warning p-2">A</div>
+  <div class="col-sm-3 bg-info p-2">B</div>
+  <div class="col-sm-3 bg-danger p-2">C</div>
+  <div class="col-sm-3 bg-success p-2">D</div>
+</div>
+```
+
+---
+
+## 5. Alignment and Reordering in Grid
+
+### 5.1: Centered Row
+
+```html
+<div class="row justify-content-center align-items-center" style="height:100px;">
+  <div class="col-4 bg-primary text-white text-center">Centered Content</div>
+</div>
+```
+
+### 5.2: Reordered Columns
+
+```html
+<div class="row">
+  <div class="col-md-6 order-md-2 bg-info p-3">First on desktop</div>
+  <div class="col-md-6 order-md-1 bg-light p-3">Second on desktop</div>
+</div>
+```
+
+---
+
+## 6. Responsive Flexbox Utilities
+
+### 6.1: Flex Navbar
+
+```html
+<nav class="d-flex flex-column flex-md-row bg-dark p-2 mb-4 rounded">
+  <a class="nav-link text-white" href="#">Home</a>
+  <a class="nav-link text-white" href="#">About</a>
+  <a class="nav-link text-white" href="#">Contact</a>
+</nav>
+```
+
+### 6.2: Card with Flex Utilities
+
+```html
+<div class="card d-flex flex-row justify-content-between align-items-center p-3">
+  <div>
+    <h5 class="card-title">Flex Card</h5>
+    <p class="card-text">Using flex utilities.</p>
+  </div>
+  <img src="https://via.placeholder.com/60" class="rounded-circle" alt="...">
+</div>
+```
+
+---
+
+## 7. Typography
+
+### 7.1: Typography Utilities
+
+```html
+<h1 class="display-1">Display 1</h1>
+<p class="lead text-muted">This is a lead paragraph with muted text.</p>
+<p class="fw-bold">Bold text</p>
+```
+
+### 7.2: Text Transform Classes
+
+```html
+<p class="text-uppercase">uppercase text</p>
+<p class="text-lowercase">LOWERCASE TEXT</p>
+<p class="text-capitalize">sample capitalized text</p>
+```
+
+---
+
+## 8. Forms
+
+### 8.1: Registration Form
+
+```html
+<form>
+  <div class="mb-3">
+    <label class="form-label">Name</label>
+    <input type="text" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input type="email" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Gender</label>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="gender">
+      <label class="form-check-label">Male</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="gender">
+      <label class="form-check-label">Female</label>
+    </div>
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text">@</span>
+    <input type="text" class="form-control" placeholder="Username">
+  </div>
+  <button class="btn btn-primary">Register</button>
+</form>
+```
+
+### 8.2: Login Form (Floating Labels)
+
+```html
+<form>
+  <div class="form-floating mb-2">
+    <input type="email" class="form-control" id="loginEmail" placeholder="Email">
+    <label for="loginEmail">Email address</label>
+  </div>
+  <div class="form-floating mb-2">
+    <input type="password" class="form-control" id="loginPass" placeholder="Password">
+    <label for="loginPass">Password</label>
+  </div>
+  <button class="btn btn-success">Login</button>
+</form>
+```
+
+---
+
+## 9. Buttons
+
+### 9.1: Contextual and Outline Buttons
+
+```html
+<button class="btn btn-primary">Primary</button>
+<button class="btn btn-secondary">Secondary</button>
+<button class="btn btn-success">Success</button>
+<button class="btn btn-danger">Danger</button>
+<button class="btn btn-warning">Warning</button>
+<button class="btn btn-info">Info</button>
+<button class="btn btn-light">Light</button>
+<button class="btn btn-dark">Dark</button>
+<button class="btn btn-outline-primary">Outline Primary</button>
+```
+
+### 9.2: Button Group and Toggle
+
+```html
+<div class="btn-group" role="group">
+  <input type="checkbox" class="btn-check" id="btncheck1">
+  <label class="btn btn-outline-primary" for="btncheck1">Check 1</label>
+  <input type="checkbox" class="btn-check" id="btncheck2">
+  <label class="btn btn-outline-primary" for="btncheck2">Check 2</label>
+</div>
+```
+
+---
+
+## 10. Navbars and Navigation
+
+### 10.1: Responsive Navbar
+
+```html
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Logo</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search">
+        <button class="btn btn-outline-light" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+```
+
+### 10.2: Tabs and Pills
+
+```html
+<ul class="nav nav-tabs">
+  <li class="nav-item"><a class="nav-link active" href="#">Tab 1</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Tab 2</a></li>
+</ul>
+<ul class="nav nav-pills mt-3">
+  <li class="nav-item"><a class="nav-link active" href="#">Pill 1</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Pill 2</a></li>
+</ul>
+```
+
+---
+
+## 11. Cards and Media Objects
+
+### 11.1: Profile Card
+
+```html
+<div class="card" style="width: 18rem;">
+  <img src="https://via.placeholder.com/150" class="card-img-top rounded-circle border border-3 border-primary mx-auto mt-3" alt="Profile">
+  <div class="card-body text-center">
+    <h5 class="card-title">Jane Doe</h5>
+    <p class="card-text">Profile card using Bootstrap components.</p>
+  </div>
+</div>
+```
+
+### 11.2: Media Object
+
+```html
+<div class="d-flex align-items-start bg-light p-3 rounded">
+  <img src="https://via.placeholder.com/80" class="rounded-circle me-3" alt="Media">
+  <div>
+    <h5>Media Object Title</h5>
+    <p>Media object aligned left using flex utilities.</p>
+  </div>
+</div>
+```
+
+---
+
+## 12. Spacing Utilities
+
+### 12.1: Margin and Padding
+
+```html
+<div class="m-3 mt-4 p-2 py-5 bg-secondary text-white">
+  Margin and padding utilities applied.
+</div>
+```
+
+### 12.2: Pricing Section
+
+```html
+<div class="row">
+  <div class="col-md-4 m-3 p-2 border rounded">
+    <h5>Basic</h5>
+    <p class="lead">$10 / mo</p>
+    <button class="btn btn-outline-primary">Choose</button>
+  </div>
+  <div class="col-md-4 m-3 p-2 border rounded">
+    <h5>Pro</h5>
+    <p class="lead">$20 / mo</p>
+    <button class="btn btn-outline-success">Choose</button>
+  </div>
+  <div class="col-md-4 m-3 p-2 border rounded">
+    <h5>Enterprise</h5>
+    <p class="lead">$40 / mo</p>
+    <button class="btn btn-outline-danger">Choose</button>
+  </div>
+</div>
+```
+
+---
+
+## 13. Colors and Backgrounds
+
+### 13.1: Dashboard with Contextual Backgrounds
+
+```html
+<div class="row">
+  <div class="col-md-4 p-3 bg-primary text-white">Primary</div>
+  <div class="col-md-4 p-3 bg-warning">Warning</div>
+  <div class="col-md-4 p-3 bg-success text-white">Success</div>
+</div>
+```
+
+### 13.2: Background Gradient
+
+```html
+<div class="p-3 bg-dark bg-gradient text-white rounded">
+  Gradient with bg-dark and white text
+</div>
+```
+
+---
+
+## 14. Display and Visibility
+
+### 14.1: Responsive Show/Hide
+
+```html
+<div class="d-none d-md-block bg-info text-white p-2">Visible on md and up</div>
+<div class="d-lg-flex d-none bg-warning text-dark p-2">Visible on lg and up</div>
+```
+
+### 14.2: Responsive Sidebar
+
+```html
+<div class="d-none d-md-block bg-secondary text-white p-3">
+  Sidebar visible only on md and up
+</div>
+```
+
+---
+
+## 15. Borders, Shadows, and Rounded Corners
+
+### 15.1: Border and Rounded
+
+```html
+<img src="https://via.placeholder.com/80" class="border border-primary border-3 rounded-circle" alt="Rounded">
+```
+
+### 15.2: Shadow and Rounded Pill
+
+```html
+<div class="card shadow-lg rounded-pill p-3">
+  <div class="card-body text-center">
+    Card with shadow-lg and rounded-pill
+  </div>
+</div>
+```
+
+---
+
+## 16. Positioning Utilities
+
+### 16.1: Fixed Footer
+
+```html
+<footer class="bg-dark text-white text-center py-3 position-fixed bottom-0 w-100">
+  Fixed Footer
+</footer>
+```
+
+### 16.2: Badge Over Image
+
+```html
+<div class="position-relative" style="width:120px;">
+  <img src="https://via.placeholder.com/120" class="w-100" alt="badge demo">
+  <span class="badge bg-danger position-absolute" style="right:8px; top:8px;">New</span>
+</div>
+```
+
+---
+
+## 17. Icons with Bootstrap Icons
+
+### 17.1: Social Media Icons in Footer
+
+```html
+<footer class="bg-dark text-white text-center py-3">
+  <span>Follow us:</span>
+  <a href="#" class="text-white ms-2"><i class="bi bi-facebook"></i></a>
+  <a href="#" class="text-white ms-2"><i class="bi bi-twitter"></i></a>
+  <a href="#" class="text-white ms-2"><i class="bi bi-instagram"></i></a>
+</footer>
+```
+
+### 17.2: Icon-Only Buttons
+
+```html
+<button class="btn btn-primary"><i class="bi bi-house"></i></button>
+<button class="btn btn-outline-secondary"><i class="bi bi-bell"></i></button>
+```
+
+---
+
+## 18. Bootstrap 5 JavaScript Plugins
+
+### 18.1: Modal Popup
+
+```html
+<button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myModal">Show Modal</button>
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel">Bootstrap Modal</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">This is a Bootstrap 5 modal!</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### 18.2: Accordion
+
+```html
+<div class="accordion" id="exampleAccordion">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+        Accordion Item #1
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#exampleAccordion">
+      <div class="accordion-body">
+        This is the first item's accordion body.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+        Accordion Item #2
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#exampleAccordion">
+      <div class="accordion-body">
+        This is the second item's accordion body.
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+---
+
+## 19. Customization with Sass
+
+### 19.1: Set Up Bootstrap with Sass (`npm install bootstrap`)
+
+```bash
+npm install bootstrap
+```
+
+### 19.2: Customize Colors and Border Radius
+
+```scss
+// _variables.scss
+$primary: #4b0082;
+$border-radius: 2rem;
+```
+Then in your main SCSS:
+```scss
+@import "node_modules/bootstrap/scss/functions";
+@import "variables";
+@import "node_modules/bootstrap/scss/bootstrap";
+```
+Compile with:
+```bash
+sass main.scss bootstrap-custom.css
+```
